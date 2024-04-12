@@ -5,7 +5,7 @@ import struct
 def dns_query(type, name, server):
     # Create a UDP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server_address = (server, 53)  # DNS server typically listens on port 53
+    server_address = (server, 53)  
 
     # Create the DNS query
     ID = 0x1234
@@ -27,13 +27,13 @@ def dns_query(type, name, server):
     # Encode the QNAME
     qname_parts = name.split('.')
     qname_encoded_parts = [struct.pack('B', len(part)) + part.encode('ascii') for part in qname_parts]
-    qname_encoded = b''.join(qname_encoded_parts) + b'\x00'  # Null termination for domain string
+    qname_encoded = b''.join(qname_encoded_parts) + b'\x00'  
 
     # Encode the QTYPE and QCLASS
     if type == 'A':
-        qtype = 1  # A record
+        qtype = 1  
     elif type == 'AAAA':
-        qtype = 28  # AAAA record
+        qtype = 28  
     else:
         raise ValueError('Invalid type')
 
